@@ -273,7 +273,6 @@ public class SwipeHelper implements SwipeIntercept {
 
             mPreviousActivity = ActivityLifecycleHelper.getPreviousActivity();
             if (mPreviousActivity == null) {
-                mPreviousActivity = null;
                 mPreviousContentView = null;
                 return false;
             }

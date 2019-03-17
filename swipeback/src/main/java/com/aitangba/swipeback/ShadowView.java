@@ -16,7 +16,7 @@ class ShadowView extends View {
 
     public ShadowView(Context context) {
         super(context);
-        int colors[] = {0x00000000, 0x17000000, 0x43000000};//分别为开始颜色，中间夜色，结束颜色
+        int[] colors = {0x00000000, 0x17000000, 0x43000000};//分别为开始颜色，中间夜色，结束颜色
         mDrawable = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, colors);
     }
 
