@@ -80,7 +80,6 @@ public class ActivityLifecycleHelper implements Application.ActivityLifecycleCal
 
     /**
      * 获取集合中当前Activity
-     * @return
      */
     public static Activity getLatestActivity() {
         int count = activities.size();
@@ -92,9 +91,8 @@ public class ActivityLifecycleHelper implements Application.ActivityLifecycleCal
 
     /**
      * 获取集合中上一个Activity
-     * @return
      */
-    public static Activity getPreviousActivity(){
+    public static Activity getPreviousActivity() {
         int count = activities.size();
         if (count < 2) {
             return null;

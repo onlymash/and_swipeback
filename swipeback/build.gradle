@@ -30,7 +30,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.appcompat:appcompat:1.1.0-alpha03'
 }
 
 def siteUrl = 'https://github.com/XBeats/and_swipeback' // 项目的主页

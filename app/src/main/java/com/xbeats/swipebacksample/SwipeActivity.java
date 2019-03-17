@@ -28,7 +28,7 @@ public class SwipeActivity extends SwipeBackActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_next);
 
-        RelativeLayout containerLayout = (RelativeLayout) findViewById(R.id.container);
+        RelativeLayout containerLayout = findViewById(R.id.container);
 
         //随机色
         Random random = new Random();
@@ -38,7 +38,7 @@ public class SwipeActivity extends SwipeBackActivity {
 
         containerLayout.setBackgroundColor(Color.argb(255, red, green, blue));
 
-        TextView textView = (TextView) findViewById(R.id.text);
+        TextView textView = findViewById(R.id.text);
         page = MainActivity.Page;
         textView.setText("当前页" + page);
         textView.setOnClickListener(new View.OnClickListener() {

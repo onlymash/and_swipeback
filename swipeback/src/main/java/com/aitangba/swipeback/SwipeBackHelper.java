@@ -157,7 +157,7 @@ public class SwipeBackHelper extends Handler implements SwipeIntercept {
                     mIsSliding = false;
                     sendEmptyMessage(MSG_ACTION_UP);
                     return true;
-                } else if (mIsSliding && actionIndex != 0) {
+                } else if (mIsSliding) {
                     return true;
                 }
                 break;
@@ -198,7 +198,7 @@ public class SwipeBackHelper extends Handler implements SwipeIntercept {
                 // hide input method
                 InputMethodManager inputMethod = (InputMethodManager) mActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
                 View view = mActivity.getCurrentFocus();
-                if (view != null) {
+                if (view != null && inputMethod != null) {
                     inputMethod.hideSoftInputFromWindow(view.getWindowToken(), 0);
                 }
 
@@ -298,7 +298,7 @@ public class SwipeBackHelper extends Handler implements SwipeIntercept {
             mDistanceX = 0;
         }
 
-        previewActivityContentView.setX(-width / 3 + mDistanceX / 3);
+        previewActivityContentView.setX(-width / 3.0f + mDistanceX / 3);
         shadowView.setX(mDistanceX - SHADOW_WIDTH);
         currentActivityContentView.setX(mDistanceX);
     }
@@ -324,8 +324,8 @@ public class SwipeBackHelper extends Handler implements SwipeIntercept {
         ObjectAnimator previewViewAnim = new ObjectAnimator();
         previewViewAnim.setInterpolator(interpolator);
         previewViewAnim.setProperty(View.TRANSLATION_X);
-        float preViewStart = mDistanceX / 3 - width / 3;
-        float preViewStop = slideCanceled ? - width / 3 : 0;
+        float preViewStart = mDistanceX / 3 - width / 3.0f;
+        float preViewStop = slideCanceled ? - width / 3.0f : 0;
         previewViewAnim.setFloatValues(preViewStart, preViewStop);
         previewViewAnim.setTarget(previewView);
 
@@ -393,7 +393,6 @@ public class SwipeBackHelper extends Handler implements SwipeIntercept {
 
             mPreviousActivity = ActivityLifecycleHelper.getPreviousActivity();
             if(mPreviousActivity == null) {
-                mPreviousActivity = null;
                 mPreviousContentView = null;
                 return false;
             }
@@ -426,9 +425,8 @@ public class SwipeBackHelper extends Handler implements SwipeIntercept {
             if(mPreviousContentView == null) return;
 
             View view = mPreviousContentView;
-            FrameLayout contentView = mCurrentContentView;
             view.setX(0);
-            contentView.removeView(view);
+            mCurrentContentView.removeView(view);
             mPreviousContentView = null;
 
             if(mPreviousActivity == null || mPreviousActivity.isFinishing()) return;
@@ -448,10 +446,9 @@ public class SwipeBackHelper extends Handler implements SwipeIntercept {
             }
             final FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(
                     SHADOW_WIDTH, FrameLayout.LayoutParams.MATCH_PARENT);
-            final FrameLayout contentView = mCurrentContentView;
 
             if(this.mShadowView.getParent() == null) {
-                contentView.addView(this.mShadowView, 1, layoutParams);
+                mCurrentContentView.addView(this.mShadowView, 1, layoutParams);
             } else {
                 this.removeShadowView();
                 this.addShadowView();
@@ -466,10 +463,9 @@ public class SwipeBackHelper extends Handler implements SwipeIntercept {
         }
 
         private void addCacheView() {
-            final FrameLayout contentView = mCurrentContentView;
             final View previousView = mPreviousContentView;
             PreviousPageView previousPageView = new PreviousPageView(mActivity);
-            contentView.addView(previousPageView, 0);
+            mCurrentContentView.addView(previousPageView, 0);
             previousPageView.cacheView(previousView);
         }
 

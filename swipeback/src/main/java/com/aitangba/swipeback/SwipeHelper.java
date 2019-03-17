@@ -179,7 +179,7 @@ public class SwipeHelper implements SwipeIntercept {
             mDistanceX = 0;
         }
 
-        previewActivityContentView.setX(-width / 3 + mDistanceX / 3);
+        previewActivityContentView.setX(-width / 3f + mDistanceX / 3);
         shadowView.setX(mDistanceX - SHADOW_WIDTH);
         currentActivityContentView.setX(mDistanceX);
     }
@@ -205,8 +205,8 @@ public class SwipeHelper implements SwipeIntercept {
         ObjectAnimator previewViewAnim = new ObjectAnimator();
         previewViewAnim.setInterpolator(interpolator);
         previewViewAnim.setProperty(View.TRANSLATION_X);
-        float preViewStart = mDistanceX / 3 - width / 3;
-        float preViewStop = slideCanceled ? -width / 3 : 0;
+        float preViewStart = mDistanceX / 3 - width / 3f;
+        float preViewStop = slideCanceled ? -width / 3f : 0;
         previewViewAnim.setFloatValues(preViewStart, preViewStop);
         previewViewAnim.setTarget(previewView);
 
